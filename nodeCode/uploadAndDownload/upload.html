@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="uploadForm">
+    <p>指定文件名:<input type="text" name="fileName" value=""/></p>
+    <p>上传文件:<input type="file" name="file"/></p>
+    <input type="button" value="上传" onclick="doUpload()"/>
+</form>
+</body>
+</html>
+<script type="text/javascript" src="./public/javascripts/jquery.js"></script>
+<script type="text/javascript">
+    function doUpload(){
+        let formData = new FormData($("#uploadForm")[0]);
+        let param = {cmd:0x13,param:'{"userId":1}'};
+        formData.append('otherData',JSON.stringify(param));
+        $.ajax({
+            url:'http://localhost:3000/dictContrast/doUpload/1',
+            type:'post',
+            data:formData,
+            async:false,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success:function (data) {
+                alert(data);
+            },
+            error:function (data) {
+                alert(data);
+            }
+        })
+    }
+</script>
